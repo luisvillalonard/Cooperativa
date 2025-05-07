@@ -1,0 +1,112 @@
+import { UserApp } from "@interfaces/auth";
+import { ResponseResult, SessionStorageKeys } from "../interfaces/global";
+
+enum MethodFetch {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
+const baseFetch = {
+    method: MethodFetch.GET, // *GET, POST, PUT, DELETE, etc.
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+        mode: 'cors', // no-cors, *cors, same-origin,
+        Authorization: '',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: undefined // body data type must match "Content-Type" header
+}
+
+export const useFetch = () => {
+
+    async function customFetch<T>(url: string, options?: RequestInit): Promise<ResponseResult<T>> {
+
+        let resp: ResponseResult<T> = {
+            ok: false,
+            datos: undefined,
+            mensaje: undefined,
+            paginacion: undefined
+        }
+
+        // Establezco el usuario logueado
+        let user: UserApp | null = null;
+        const dataStorage = sessionStorage.getItem(SessionStorageKeys.User)
+        if (dataStorage) {
+            user = JSON.parse(dataStorage);
+        }
+
+        const apiUrl = import.meta.env.MODE === 'production'
+            ? import.meta.env.VITE_API_URL_PROD
+            : import.meta.env.MODE === 'staging'
+                ? import.meta.env.VITE_API_URL_QA
+                : import.meta.env.VITE_API_URL_DEV;
+        const defaultHeaders = { ...baseFetch.headers, Authorization: user?.token || '' };
+        const reqMethod = !options?.method ? baseFetch.method : options.method;
+        const reqHeader = options?.headers ? { ...options.headers, ...defaultHeaders } : defaultHeaders;
+        const reqBody = !options?.body ? null : JSON.stringify(options?.body);
+        const reqOptions = {
+            method: reqMethod,
+            headers: reqHeader,
+            body: reqBody,
+        }
+
+        try {
+            const fetchResult = await fetch(`${apiUrl}/api/${url}`, reqOptions);
+            const result = await fetchResult.json();
+
+            if (fetchResult.ok) {
+                return result;
+            }
+
+            return Promise.resolve({
+                ok: false,
+                datos: result,
+                mensaje: fetchResult.statusText
+            } as ResponseResult<T>);
+
+        } catch (err: unknown) {
+            const { message } = err as Error;
+            return Promise.resolve({
+                ...resp,
+                ok: false,
+                mensaje: (message || 'Situación inesperada tratando de obtener los datos')
+            });
+        }
+    }
+
+    const Get = async <T extends unknown>(url: string) => await customFetch<T>(url);
+
+    const Post = async <T extends unknown>(url: string, item: T | any) => {
+        return await customFetch<T>(url, {
+            method: MethodFetch.POST,
+            body: item
+        })
+    }
+
+    const Put = async <T extends unknown>(url: string, item: T | any) => {
+        return await customFetch<T>(url, {
+            method: MethodFetch.PUT,
+            body: item
+        })
+    }
+
+    const Del = async (url: string, item?: any) => {
+        return await customFetch(url, {
+            method: MethodFetch.DELETE,
+            body: item
+        })
+    }
+
+    return {
+        Get,
+        Post,
+        Put,
+        Del,
+    }
+
+}
