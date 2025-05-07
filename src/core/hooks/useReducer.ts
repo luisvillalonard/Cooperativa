@@ -4,6 +4,7 @@ import reducer, { Actions, ActionTypes, initState, State } from "../reducers/glo
 import { useFetch } from "./useFetch";
 
 export function useReducerHook<T extends unknown>(urlBase: string) {
+    
     const [state, dispatch] = useReducer<Reducer<State<T>, ActionTypes<T>>>(reducer, initState<T>());
     const api = useFetch();
 
@@ -69,8 +70,10 @@ export function useReducerHook<T extends unknown>(urlBase: string) {
             resp = await api.Get<T[]>(urlBase);
             dispatchSetData(resp);
         } catch {
-            dispatchFetchingComplete();
+            dispatchSetData({} as ResponseResult<T[]>);
         }
+
+        dispatchFetchingComplete();
 
     }
 

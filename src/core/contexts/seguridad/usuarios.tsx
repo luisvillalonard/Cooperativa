@@ -10,7 +10,6 @@ import { createContext, useContext } from "react"
 export interface UsuariosContextState<T> extends GlobalContextState<T> {
     nuevo: () => void,
     validar: (item: Login) => Promise<ResponseResult<UserApp>>,
-    porCodigo: (codigo: string) => Promise<ResponseResult<T>>,
     cambiarClave: (item: CambioClave) => Promise<ResponseResult<UserApp>>,
 }
 
@@ -84,8 +83,8 @@ export default function UsuariosProvider(props: Pick<ControlProps, "children">) 
             agregar,
             actualizar,
             todos,
-            cambiarClave,
             validar,
+            cambiarClave,
         }}>
             {children}
         </UsuariosContext.Provider>

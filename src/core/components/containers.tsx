@@ -1,6 +1,6 @@
 import { Card, CardProps, theme } from "antd"
 
-const Container = (props: CardProps) => {
+export const Container = (props: CardProps) => {
 
     const { token } = theme.useToken()
 
@@ -11,7 +11,7 @@ const Container = (props: CardProps) => {
                 ...props.style,
                 position: 'relative',
                 backgroundColor: 'white',
-                boxShadow: token.boxShadow,
+                boxShadow: token.boxShadowTertiary,
             }}
             styles={{
                 header: {
@@ -28,4 +28,3 @@ const Container = (props: CardProps) => {
         </Card>
     )
 }
-export default Container

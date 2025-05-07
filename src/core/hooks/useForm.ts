@@ -2,11 +2,9 @@ import { ChangeEvent, useState } from "react";
 
 export function useForm<T>(initState: T) {
 
-    const [entidad, setEntidad] = useState<T>(initState);
+    const [entidad, setEntidad] = useState<T>(initState)
 
-    const editar = (item: T) => {
-        setEntidad(item)
-    }
+    const editar = (item: T) => setEntidad(item)
 
     const handleChangeInput = async ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { type, name, value } = target;

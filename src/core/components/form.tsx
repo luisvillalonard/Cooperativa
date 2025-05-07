@@ -1,27 +1,15 @@
-import { ButtonDefault } from "@components/buttons/default"
-import { Button, Flex, Form, Modal, ModalProps } from "antd"
+import { ButtonDefault, ButtonPrimary } from "@components/buttons"
+import { Flex, Form, Modal, ModalProps } from "antd"
 import { Store } from "antd/es/form/interface"
 import { FormProps } from "react-router-dom"
 
-/* type FormDrawerProps = {
-    name: string,
-    title: string,
-    open: boolean,
-    vertical?: boolean,
-    loading?: boolean,
-    children: JSX.Element[] | JSX.Element,
-} */
-
-const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
+export const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
     initialValues?: Store,
     onClose?: (e: React.MouseEvent | React.KeyboardEvent) => void,
     onFinish: (values: any) => void,
 }) => {
 
-    const {
-        name, title, open, loading, initialValues, children,
-        onClose, onFinish
-    } = props
+    const { name, title, open, loading, initialValues, children, onClose, onFinish } = props
 
     return (
         <Modal
@@ -34,7 +22,7 @@ const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
             footer={
                 <Flex justify="space-between">
                     <ButtonDefault key="1" htmlType="button" onClick={onClose}>Cerrar</ButtonDefault>
-                    <Button key="2" shape="round" type="primary" htmlType="submit" form={name} loading={loading}>Guardar</Button>
+                    <ButtonPrimary key="2" shape="round" type="primary" htmlType="submit" form={name} loading={loading}>Guardar</ButtonPrimary>
                 </Flex>
             }
             styles={{
@@ -56,4 +44,3 @@ const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
         </Modal>
     )
 }
-export default FormModal;

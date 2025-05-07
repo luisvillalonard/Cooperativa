@@ -1,3 +1,5 @@
+import { Empleado, Empresa } from "./empresas";
+
 export interface Menu {
     id: number,
     titulo: string,
@@ -34,9 +36,9 @@ export interface Permiso {
 export interface Usuario {
     id: number,
     acceso: string,
-    empleadoId?: string,
+    empleado?: Empleado | undefined,
     rol: Rol | undefined,
-    correo?: string;
+    empresa: Empresa | undefined;
     cambio: boolean,
     activo: boolean
 }

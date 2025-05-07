@@ -5,9 +5,8 @@ import { IconType } from 'react-icons';
 
 export interface ControlProps {
     children: React.ReactNode | React.ReactNode[],
-    title?: string | React.ReactNode,
-    icon?: React.ReactElement | JSX.Element | IconType,
-    extra: React.ReactNode,
+    title: string | React.ReactNode,
+    icon: React.ReactElement | JSX.Element | IconType,
     message?: string,
 
     item?: any,
