@@ -6,7 +6,7 @@ import PageLogin from '@pages/seguridad/login/page'
 import PageUsuarios from '@pages/seguridad/usuarios/page'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 
-const PrivateRoutes = () => {
+const RoutesAuthenticate = () => {
 
     const { state: { user } } = useAuth();
 
@@ -15,21 +15,20 @@ const PrivateRoutes = () => {
     return <Outlet />
 }
 
-const RutasApp = () => {
+export const RoutesPrivate = () => {
 
     return (
         <Routes>
-            <Route element={<PrivateRoutes />}>
+            <Route path='*' element={<PageNotFound />} />
+            <Route path={'/login'} element={<PageLogin />} />
+            <Route element={<RoutesAuthenticate />}>
                 <Route path={'/'} element={<PageHome />} />
                 <Route path={`${Urls.Seguridad.Base}/${Urls.Seguridad.Usuarios}`} element={<PageUsuarios />} />
                 <Route path={Urls.Seguridad.Base}>
                     <Route path={Urls.Seguridad.Usuarios} element={<PageUsuarios />} />
                 </Route>
             </Route>
-            <Route path='*' element={<PageNotFound />} />
-            <Route path={'/login'} element={<PageLogin />} />
         </Routes>
     )
 
 }
-export default RutasApp

@@ -1,7 +1,7 @@
 /** CSS */
 import HeaderApp from '@components/layout/header'
 import MenuApp from '@components/layout/menu'
-import RutasApp from '@components/layout/rutas'
+import { RoutesPrivate } from '@components/layout/rutas'
 import { Layout, theme } from 'antd'
 import './App.css'
 
@@ -12,7 +12,9 @@ export default function App() {
   /* const { state: { user } } = useAuth() */
   const { token } = theme.useToken()
 
-  /* if (!user) return <Outlet /> */
+  /* if (!user) {
+    return (<RoutesPrivate />)
+  } */
 
   return (
     <Layout className='h-100'>
@@ -20,7 +22,7 @@ export default function App() {
       <Layout style={{ backgroundColor: token.colorBgContainer }}>
         <MenuApp />
         <Layout.Content className='p-4 position-relative overflow-auto'>
-          <RutasApp />
+          <RoutesPrivate />
         </Layout.Content>
       </Layout>
     </Layout>

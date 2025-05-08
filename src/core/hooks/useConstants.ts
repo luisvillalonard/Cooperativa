@@ -7,6 +7,13 @@ export const Urls = {
     Home: '/',
     Dashboard: '/dash',
     Login: '/login',
+    Empresas: {
+        Base: 'empresas',
+        Horarios: 'horarios',
+        Posiciones: 'posiciones',
+        Empleados: 'empleados',
+        Sucursales: 'sucursales',
+    },
     Seguridad: {
         Base: 'seguridad',
         Roles: 'roles',

@@ -1,28 +1,41 @@
+import { Genero } from "./auxiliares";
+import { Municipio, Provincia } from "./configuraciones";
+
 export interface Empresa {
-    id: 1,
+    id: number,
     nombre: string,
     rnc: string,
-    direccion: string,
-    telefono: string,
-    correo: string,
+    direccion?: string,
+    provincia: Provincia | undefined,
+    municipio: Municipio | undefined,
+    telefono?: string,
+    webSite?: string,
+    correo?: string,
+    fax?: string,
+    logoId?: number,
     activa: boolean,
 }
 
 export interface Empleado {
     id: number,
     nombre: string,
-    cedula: string,
-    correo: string,
+    genero: Genero | undefined,
+    cedula?: string,
+    correo?: string,
     horario: Horario | undefined,
-    posicion: Posicion | undefined,
+    posicion?: Posicion,
+    empresa: Empresa | undefined,
     salario: number,
-    activo: false
+    activo: boolean,
+    fotoId?: number,
+    fechaEntrada?: string,
+    fechaSalida?: string,
 }
 
 export interface Posicion {
     id: number,
     nombre: string,
-    descripcion: string,
+    descripcion?: string,
     sueldo: number,
     activa: boolean
 }
@@ -32,5 +45,5 @@ export interface Horario {
     nombre: string,
     horaInicio: string,
     horaFin: string,
-    activo: true
+    activo: boolean,
 }

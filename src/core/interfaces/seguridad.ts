@@ -33,14 +33,23 @@ export interface Permiso {
     menuId: number,
 }
 
+export interface Rol {
+    id: number,
+    nombre: string,
+    descripcion?: string,
+    esAdmin: boolean,
+    activo: boolean,
+    permisos: Permiso[],
+}
+
 export interface Usuario {
     id: number,
     acceso: string,
-    empleado?: Empleado | undefined,
     rol: Rol | undefined,
     empresa: Empresa | undefined;
+    empleado?: Empleado,
     cambio: boolean,
-    activo: boolean
+    activo: boolean,
 }
 
 export interface CambioClave {

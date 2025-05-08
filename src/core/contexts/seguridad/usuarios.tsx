@@ -31,7 +31,7 @@ export default function UsuariosProvider(props: Pick<ControlProps, "children">) 
         errorResult,
         dispatchFetching,
         dispatchFetchingComplete,
-    } = useReducerHook<Usuario>(Urls.Seguridad.Usuarios);
+    } = useReducerHook<Usuario>(urlBase);
     const api = useFetch();
 
     const nuevo = async (): Promise<void> => {
@@ -39,6 +39,7 @@ export default function UsuariosProvider(props: Pick<ControlProps, "children">) 
             id: 0,
             acceso: '',
             rol: undefined,
+            empresa: undefined,
             cambio: false,
             activo: false
         });

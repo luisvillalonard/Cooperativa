@@ -7,8 +7,8 @@ import { GlobalContextState } from "@reducers/global"
 import { createContext, useContext } from "react"
 
 export interface PermisosContextState<T> extends GlobalContextState<T> {
-    getByRolId: (rolId: number) => Promise<ResponseResult<Rol>>,
-    //permitionList: () => Permiso[],
+    getByRolId: (rolId: number) => Promise<ResponseResult<T>>,
+    roles: () => Promise<ResponseResult<T[]>>,
 }
 
 export const PermisosContext = createContext<PermisosContextState<Rol>>({} as PermisosContextState<Rol>)
@@ -18,6 +18,7 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
     const { children } = props
     const urlBase = Urls.Seguridad.Permisos
     const urlRolPorId = `${urlBase}/rolId`
+    const urlRoles = `${urlBase}/roles`
     const { state, dispatchFetching, dispatchFetchingComplete, editar, cancelar, agregar, actualizar, todos, errorResult } = useReducerHook<Rol>(urlBase);
     const api = useFetch();
 
@@ -32,7 +33,7 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
     }
 
     const getByRolId = async (rolId: number): Promise<ResponseResult<Rol>> => {
-        
+
         dispatchFetching();
         let resp: ResponseResult<Rol>;
 
@@ -40,6 +41,21 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
             resp = await api.Get<Rol>(`${urlRolPorId}?rolId=${rolId}`);
         } catch (error: any) {
             resp = errorResult<Rol>(error);
+        }
+
+        dispatchFetchingComplete();
+        return resp;
+    }
+
+    const roles = async (): Promise<ResponseResult<Rol[]>> => {
+
+        dispatchFetching();
+        let resp: ResponseResult<Rol[]>;
+
+        try {
+            resp = await api.Get<Rol[]>(urlRoles);
+        } catch (error: any) {
+            resp = errorResult<Rol[]>(error);
         }
 
         dispatchFetchingComplete();
@@ -56,6 +72,7 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
             actualizar,
             todos,
             getByRolId,
+            roles,
         }}>
             {children}
         </PermisosContext.Provider>
