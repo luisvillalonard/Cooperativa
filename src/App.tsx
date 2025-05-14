@@ -2,7 +2,7 @@
 import HeaderApp from '@components/layout/header'
 import MenuApp from '@components/layout/menu'
 import { RoutesPrivate } from '@components/layout/rutas'
-import { Layout, theme } from 'antd'
+import { Layout } from 'antd'
 import './App.css'
 
 /* IMPORTS */
@@ -10,7 +10,7 @@ import './App.css'
 export default function App() {
 
   /* const { state: { user } } = useAuth() */
-  const { token } = theme.useToken()
+  /* const { token } = theme.useToken() */
 
   /* if (!user) {
     return (<RoutesPrivate />)
@@ -19,9 +19,9 @@ export default function App() {
   return (
     <Layout className='h-100'>
       <HeaderApp />
-      <Layout style={{ backgroundColor: token.colorBgContainer }}>
+      <Layout style={{ backgroundColor: '#f0f3f7' }}>
         <MenuApp />
-        <Layout.Content className='p-4 position-relative overflow-auto'>
+        <Layout.Content className='p-4 position-relative overflow-auto' style={{ border: '2px solid red' }}>
           <RoutesPrivate />
         </Layout.Content>
       </Layout>

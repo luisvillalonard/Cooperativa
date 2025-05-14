@@ -13,12 +13,13 @@ export const Urls = {
         Posiciones: 'posiciones',
         Empleados: 'empleados',
         Sucursales: 'sucursales',
+        DatosGenerales: 'generales',
     },
     Seguridad: {
         Base: 'seguridad',
         Roles: 'roles',
         Permisos: 'permisos',
-        PermisosFormulario: 'permisos/formulario',
+        PermisosFormulario: 'permisos/formulario/:id?',
         Usuarios: 'usuarios',
         Validar: 'validar',
         CambiarClave: 'cambioClave',
@@ -32,6 +33,7 @@ export const Colors = {
     Warning: '#ffd666',
     Danger: '#ff4d4f',
     White: "#FFFFFF",
+    Black: 'rgb(25,25,25)',
     Gris51: '#515151',
     Azul: '#001529',
 }

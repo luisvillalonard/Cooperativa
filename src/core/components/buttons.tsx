@@ -1,3 +1,4 @@
+import { Colors } from '@hooks/useConstants'
 import { IconEdit } from '@hooks/useIconos'
 import type { ButtonProps } from 'antd'
 import { Button } from 'antd'
@@ -20,6 +21,10 @@ const CustomButton = (props: ButtonProps) => {
 
 export const ButtonPrimary = (props: ButtonProps) => {
     return <CustomButton {...props}>{props.children}</CustomButton>
+}
+
+export const ButtonSuccess = (props: ButtonProps) => {
+    return <CustomButton {...props} variant="solid" style={{ backgroundColor: Colors.Success, borderColor: Colors.Success }}>{props.children}</CustomButton>
 }
 
 export const ButtonDanger = (props: ButtonProps) => {

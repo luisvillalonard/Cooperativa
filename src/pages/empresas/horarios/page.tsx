@@ -1,22 +1,22 @@
 import { ButtonPrimary } from '@components/buttons'
-import { Container } from '@components/containers'
+import { Container, ContainerCommands } from '@components/containers'
 import { Searcher } from '@components/inputs'
 import Loading from '@components/loading'
 import { TitlePage } from '@components/titles'
-import { useUsuarios } from '@contexts/seguridad/usuarios'
+import { useHorarios } from '@contexts/empresas/horarios'
 import { RequestFilter } from '@interfaces/global'
 import { Col, Flex, Space, theme } from 'antd'
 import { useEffect, useState } from 'react'
 import FormUsuario from './form'
 import Listado from './listado'
 
-export default function PageUsuarios() {
+export default function PageHorarios() {
 
-    const { state: { modelo, procesando, paginacion }, nuevo, todos } = useUsuarios()
+    const { state: { modelo, procesando, paginacion }, nuevo, todos } = useHorarios()
     const [filtro, setFiltro] = useState<string>('')
-    const { token } = theme.useToken()
+    theme.useToken()
 
-    const cargarUsuarios = async () => {
+    const cargarHorarios = async () => {
 
         const request: RequestFilter = {
             pageSize: paginacion?.pageSize ?? 10,
@@ -27,20 +27,20 @@ export default function PageUsuarios() {
 
     }
 
-    useEffect(() => { cargarUsuarios() }, [filtro])
+    useEffect(() => { cargarHorarios() }, [filtro])
 
     return (
         <Col span={24}>
-            <TitlePage title='Usuarios' />
-            <Container className='mb-3'>
+            <TitlePage title='Horarios de Trabajo' />
+            <ContainerCommands className='mb-3'>
                 <Flex align='center' justify='space-between'>
-                    <ButtonPrimary key='2' size='large' onClick={nuevo}>Nuevo Usuario</ButtonPrimary>
                     <Space>
-                        <Searcher key='1' size='large' onChange={setFiltro} style={{ borderColor: token.colorBorderSecondary }} />
+                        <Searcher key='1' onChange={setFiltro} />
                     </Space>
+                    <ButtonPrimary key='2' onClick={nuevo}>Nuevo Horario</ButtonPrimary>
                 </Flex>
-            </Container>
-            <Container>
+            </ContainerCommands>
+            <Container styles={{ body: { paddingLeft: 0, paddingRight: 0 } }}>
                 <Listado />
             </Container>
             {!modelo ? <></> : <FormUsuario />}

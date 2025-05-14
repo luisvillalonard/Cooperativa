@@ -2,13 +2,14 @@ import { Urls } from "@hooks/useConstants"
 import { useFetch } from "@hooks/useFetch"
 import { useReducerHook } from "@hooks/useReducer"
 import { ControlProps, ResponseResult } from "@interfaces/global"
-import { Rol } from "@interfaces/seguridad"
+import { Menu, Rol } from "@interfaces/seguridad"
 import { GlobalContextState } from "@reducers/global"
 import { createContext, useContext } from "react"
 
 export interface PermisosContextState<T> extends GlobalContextState<T> {
     getByRolId: (rolId: number) => Promise<ResponseResult<T>>,
     roles: () => Promise<ResponseResult<T[]>>,
+    menus: () => Promise<ResponseResult<Menu[]>>,
 }
 
 export const PermisosContext = createContext<PermisosContextState<Rol>>({} as PermisosContextState<Rol>)
@@ -19,6 +20,7 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
     const urlBase = Urls.Seguridad.Permisos
     const urlRolPorId = `${urlBase}/rolId`
     const urlRoles = `${urlBase}/roles`
+    const urlMenus = `${urlBase}/menus`
     const { state, dispatchFetching, dispatchFetchingComplete, editar, cancelar, agregar, actualizar, todos, errorResult } = useReducerHook<Rol>(urlBase);
     const api = useFetch();
 
@@ -62,6 +64,21 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
         return resp;
     }
 
+    const menus = async (): Promise<ResponseResult<Menu[]>> => {
+
+        dispatchFetching();
+        let resp: ResponseResult<Menu[]>;
+
+        try {
+            resp = await api.Get<Menu[]>(urlMenus);
+        } catch (error: any) {
+            resp = errorResult<[]>(error);
+        }
+
+        dispatchFetchingComplete();
+        return resp;
+    }
+
     return (
         <PermisosContext.Provider value={{
             state,
@@ -73,6 +90,7 @@ export default function PermisosProvider(props: Pick<ControlProps, "children">) 
             todos,
             getByRolId,
             roles,
+            menus,
         }}>
             {children}
         </PermisosContext.Provider>

@@ -7,7 +7,7 @@ import AuthProvider from "@contexts/seguridad/auth";
 import PermisosProvider from "@contexts/seguridad/permisos";
 import UsuariosProvider from "@contexts/seguridad/usuarios";
 
-const ContextsProvidersTree = ContextsProviders([
+const ContextsProvidersApps = ContextsProviders([
 
     /* Empresas */
     [HorariosProvider, {}],
@@ -21,4 +21,4 @@ const ContextsProvidersTree = ContextsProviders([
     [UsuariosProvider, {}],
 
 ]);
-export default ContextsProvidersTree;
+export default ContextsProvidersApps;

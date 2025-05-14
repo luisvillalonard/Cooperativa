@@ -18,7 +18,7 @@ export default function FormUsuario() {
     const { state: { datos: empresas }, todos: cargarEmpresas } = useEmpresas()
     const [roles, setRoles] = useState<Rol[]>([])
     const { entidad, editar, handleChangeInput } = useForm<Usuario | undefined>(modelo)
-    const esNuevo = !entidad ? true : entidad.id === 0 ? true : false;
+    const esNuevo = !entidad ? true : entidad.id === 0 ? true : false
 
     const cargarAuxiliares = async () => await Promise.all([cargarRoles(), cargarEmpleados(), cargarEmpresas()]).then(([result]) => {
         if (result && result.datos) {
@@ -31,18 +31,23 @@ export default function FormUsuario() {
         if (!entidad) return;
 
         let resp;
-        if (esNuevo) {
-            resp = await agregar(entidad);
-        } else {
-            resp = await actualizar(entidad);
-        }
 
-        if (!resp) {
-            Alerta('No fue posible obtener una respuesta al intentar guardar los datos del usuario.');
-        } else if (!resp.ok) {
-            Alerta(resp.mensaje || 'Situación inesperada tratando de guardar los datos del usuario.');
-        } else {
-            Exito(`Usuario ${esNuevo ? 'registrado' : 'actualizado'}  exitosamente!`);
+        try {
+            if (esNuevo) {
+                resp = await agregar(entidad);
+            } else {
+                resp = await actualizar(entidad);
+            }
+
+            if (!resp) {
+                Alerta('No fue posible obtener una respuesta al intentar guardar los datos del usuario.');
+            } else if (!resp.ok) {
+                Alerta(resp.mensaje || 'Situación inesperada tratando de guardar los datos del usuario.');
+            } else {
+                Exito(`Usuario ${esNuevo ? 'registrado' : 'actualizado'}  exitosamente!`);
+            }
+        } catch (error: any) {
+            Alerta(error.message || 'Situación inesperada tratando de guardar los datos.');
         }
     }
 

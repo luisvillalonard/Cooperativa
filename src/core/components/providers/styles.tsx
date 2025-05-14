@@ -1,6 +1,6 @@
 import { Colors } from "@hooks/useConstants"
-import { ConfigProvider } from "antd"
 import { ControlProps } from "@interfaces/global"
+import { ConfigProvider } from "antd"
 
 const StyleProvider = (props: Pick<ControlProps, "children">) => {
 
@@ -14,11 +14,9 @@ const StyleProvider = (props: Pick<ControlProps, "children">) => {
                 token: {
                     // Seed Token
                     colorText: Colors.Gris51,
-                    colorTextBase: Colors.Gris51,
-                    colorTextHeading: Colors.Gris51,
-                    colorTextSecondary: Colors.Gris51,
-                    colorTextDisabled: Colors.Gris51,
-                    colorTextPlaceholder: 'rgb(150,150,150)'
+                    colorPrimary: Colors.Black,
+                    colorSuccess: Colors.Success,
+                    colorWarning: Colors.Warning,
 
                     // Alias Token
                     //colorBgContainer: '#ffffff',
@@ -33,16 +31,19 @@ const StyleProvider = (props: Pick<ControlProps, "children">) => {
                     DatePicker: {
                         colorBorder: Colors.Gris51,
                     },
-                    Button: {
+                    /* Button: {
                         defaultBorderColor: Colors.Gris51,
                         colorBorderSecondary: Colors.Gris51,
                         colorSuccessBorderHover: Colors.Gris51,
 
                         defaultHoverBorderColor: Colors.Gris51,
                         defaultHoverColor: Colors.Gris51,
-                    },
+                    }, */
                     Select: {
                         colorBorder: Colors.Gris51,
+                    },
+                    Switch: {
+                        colorPrimary: Colors.Primary
                     },
                     Menu: {
                         itemMarginBlock: 0,
@@ -60,8 +61,10 @@ const StyleProvider = (props: Pick<ControlProps, "children">) => {
                         verticalLabelPadding: 0,
                     },
                     Table: {
-                        headerBg: '#EEEEEE',
+                        headerBg: '#FFFFFF',
                         headerColor: Colors.Gris51,
+                        fontWeightStrong: 600,
+                        headerBorderRadius: 4,
                     }
                 }
             }}

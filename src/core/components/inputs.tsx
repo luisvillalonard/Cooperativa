@@ -1,3 +1,4 @@
+import { Colors } from "@hooks/useConstants"
 import { IconSearch } from "@hooks/useIconos"
 import { ControlProps } from '@interfaces/global'
 import type { InputProps } from 'antd'
@@ -35,13 +36,11 @@ export const Searcher = (props: Omit<InputProps, "onChange"> & Pick<ControlProps
                     onKeyUp={(evt) => { if (evt.code.toLowerCase() === 'escape') setQuery('') }} />
                 <Button
                     size={props.size}
-                    style={{
-                        borderStyle: style?.borderStyle,
-                        borderWidth: style?.borderWidth,
-                        borderColor: style?.borderColor,
-                    }}
                     icon={<IconSearch />}
-                    onClick={() => onChange?.(query)}>
+                    onClick={() => onChange?.(query)}
+                    style={{
+                        borderColor: Colors.Gris51
+                    }}>
                 </Button>
             </Space.Compact>
         </Tooltip>

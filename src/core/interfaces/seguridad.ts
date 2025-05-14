@@ -30,7 +30,8 @@ export interface Rol {
 export interface Permiso {
     id: number,
     rolId: number,
-    menuId: number,
+    menu: Menu,
+    checked: boolean,
 }
 
 export interface Rol {
@@ -45,6 +46,7 @@ export interface Rol {
 export interface Usuario {
     id: number,
     acceso: string,
+    codigo: string,
     rol: Rol | undefined,
     empresa: Empresa | undefined;
     empleado?: Empleado,

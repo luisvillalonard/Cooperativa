@@ -37,6 +37,6 @@ export default function HorariosProvider(props: Pick<ControlProps, "children">) 
     )
 }
 
-export const useUsuarios = () => {
+export const useHorarios = () => {
     return useContext<GlobalContextState<Horario>>(HorariosContext)
 }
