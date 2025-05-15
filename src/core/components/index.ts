@@ -1,11 +1,11 @@
-import * as buttons from "./buttons"
-import * as containers from "./containers"
-import * as form from "./form"
-import * as inputs from "./inputs"
-import * as tags from "./tags"
-import * as titles from "./titles"
+import * as buttons from './buttons'
+import * as containers from './containers'
+import * as form from './form'
+import * as inputs from './inputs/searcher'
+import * as tags from './tags'
+import * as titles from './titles'
 
-export { 
+export {
     buttons,
     containers,
     form,

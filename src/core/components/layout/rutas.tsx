@@ -9,6 +9,9 @@ import FormPermisos from '@pages/seguridad/permisos/form'
 import PageUsuarios from '@pages/seguridad/usuarios/page'
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import PagePermisos from '../../../pages/seguridad/permisos/page'
+import PagePosiciones from '@pages/empresas/posiciones/page'
+import PageEmpleados from '@pages/empresas/empleados/page'
+import FormEmpresa from '@pages/empresas/generales/form'
 
 const RoutesAuthenticate = () => {
 
@@ -30,10 +33,10 @@ export const RoutesPrivate = () => {
                 <Route path={`${Urls.Seguridad.Base}/${Urls.Seguridad.Usuarios}`} element={<PageUsuarios />} />
                 <Route path={Urls.Empresas.Base}>
                     <Route path={Urls.Empresas.Horarios} element={<PageHorarios />} />
-                    <Route path={Urls.Empresas.Posiciones} element={<PageConstruccion />} />
-                    <Route path={Urls.Empresas.Empleados} element={<PageConstruccion />} />
+                    <Route path={Urls.Empresas.Posiciones} element={<PagePosiciones />} />
+                    <Route path={Urls.Empresas.Empleados} element={<PageEmpleados />} />
                     <Route path={Urls.Empresas.Sucursales} element={<PageConstruccion />} />
-                    <Route path={Urls.Empresas.DatosGenerales} element={<PageConstruccion />} />
+                    <Route path={Urls.Empresas.DatosGenerales} element={<FormEmpresa />} />
                 </Route>
                 <Route path={Urls.Seguridad.Base}>
                     <Route path={Urls.Seguridad.Permisos} element={<PagePermisos />} />

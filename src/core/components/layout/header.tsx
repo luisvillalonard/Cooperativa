@@ -1,6 +1,61 @@
+import { useAuth } from "@contexts/seguridad/auth";
+import { Colors, Urls } from "@hooks/useConstants";
+import { IconLogout, IconMenu, IconUser } from "@hooks/useIconos";
+import { Button, Flex, Layout, Popconfirm, Tooltip, Typography } from "antd";
+import { Link } from "react-router-dom";
+
 export default function HeaderApp() {
+
+  const { state: { user }, openMenu, openUserInfo, LoggedOut } = useAuth()
+  const headerStyle: React.CSSProperties = {
+    position: 'sticky',
+    top: 0,
+    zIndex: 1,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: 26,
+    paddingRight: 26,
+    backgroundColor: Colors.Success,
+  }
+
   return (
-    <h1>Header App</h1>
+    <Layout.Header style={headerStyle}>
+      <Flex align="center" justify="space-between" style={{ width: '100%' }}>
+
+        <Flex align="center" gap={14}>
+          <Tooltip title="Ir a la p&aacute;gina de inicio">
+            <Link to={Urls.Home}>
+              <Typography.Title level={2} style={{ margin: 0, color: 'rgba(255,255,255,0.8)' }}>Cooperativa</Typography.Title>
+            </Link>
+          </Tooltip>
+          <Button type="text" icon={<IconMenu style={{ fontSize: 24, color: Colors.White }} />} onClick={openMenu} />
+        </Flex>
+
+        <Flex align="center">
+          <Tooltip title="Ver mis datos">
+            <Button type="text" icon={<IconUser style={{ fontSize: 22 }} />} style={{ color: 'rgba(255,255,255,0.8)' }} onClick={openUserInfo}>
+              {user?.acceso || 'Desconocido'}
+            </Button>
+          </Tooltip>
+          <Tooltip title="Cerrar la sesi&oacute;n">
+            <Popconfirm
+              placement="bottomRight"
+              title={<div className="fs-5">Cerrar la sesi&oacute;n</div>}
+              description={<div className="fs-6">Esta seguro(a) que desea cerrar la sesi&oacute;n actual?</div>}
+              icon={<></>}
+              okText="Aceptar"
+              okButtonProps={{ size: 'middle', variant: 'solid', color: 'primary', shape: 'round' }}
+              cancelText="Cancelar"
+              cancelButtonProps={{ size: 'middle', type: 'text' }}
+              onConfirm={LoggedOut}>
+              <Button type="text" icon={<IconLogout style={{ fontSize: 20 }} />} style={{ color: 'rgba(255,255,255,0.8)' }}>Salir</Button>
+            </Popconfirm>
+          </Tooltip>
+        </Flex>
+
+      </Flex>
+    </Layout.Header>
   )
 }
 

@@ -46,7 +46,6 @@ export default function FormUsuario() {
         return <Outlet />
     }
 
-    console.log('entidad', entidad)
     return (
         <FormModal
             name="formHorario"

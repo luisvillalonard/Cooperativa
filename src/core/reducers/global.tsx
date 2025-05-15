@@ -83,6 +83,10 @@ const reducer = <DataType extends unknown>(state: State<DataType>, action: Actio
             return { ...state, modelo: undefined, editando: false };
         }
 
+        case Actions.RELOAD: {
+            return { ...state, recargar: action.recargar };
+        }
+
         case Actions.SET_DATA: {
             return { ...state, datos: action.data, paginacion: action.paginacion, cargado: true, recargar: false };
         }

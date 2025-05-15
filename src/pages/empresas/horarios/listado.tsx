@@ -3,19 +3,10 @@ import { TagDanger, TagSuccess } from "@components/tags"
 import { useHorarios } from "@contexts/empresas/horarios"
 import { Horario } from "@interfaces/empresas"
 import { Flex, Table, Tooltip } from "antd"
-import { useEffect } from "react"
-import { useLocation } from "react-router-dom"
 
 export default function Listado() {
 
-    const { state, editar, todos } = useHorarios()
-    const { datos, recargar } = state
-    const url = useLocation()
-
-    const cargar = async () => await todos();
-
-    useEffect(() => { cargar() }, [url.pathname])
-    useEffect(() => { if (recargar) cargar() }, [recargar])
+    const { state: { datos }, editar } = useHorarios()
 
     return (
         <Table<Horario>

@@ -1,4 +1,4 @@
-import { ButtonDefault, ButtonPrimary } from "@components/buttons"
+import { ButtonDefault, ButtonSuccess } from "@components/buttons"
 import { Flex, Form, Modal, ModalProps } from "antd"
 import { Store } from "antd/es/form/interface"
 import { FormProps } from "react-router-dom"
@@ -22,7 +22,7 @@ export const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
             footer={
                 <Flex justify="space-between">
                     <ButtonDefault key="1" htmlType="button" onClick={onClose}>Cerrar</ButtonDefault>
-                    <ButtonPrimary key="2" shape="round" type="primary" htmlType="submit" form={name} loading={loading}>Guardar</ButtonPrimary>
+                    <ButtonSuccess key="2" shape="round" type="primary" htmlType="submit" form={name} loading={loading}>Guardar</ButtonSuccess>
                 </Flex>
             }
             styles={{

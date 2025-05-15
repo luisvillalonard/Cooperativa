@@ -20,11 +20,11 @@ const CustomButton = (props: ButtonProps) => {
 }
 
 export const ButtonPrimary = (props: ButtonProps) => {
-    return <CustomButton {...props}>{props.children}</CustomButton>
+    return <CustomButton {...props} style={{ border: 0 }}>{props.children}</CustomButton>
 }
 
 export const ButtonSuccess = (props: ButtonProps) => {
-    return <CustomButton {...props} variant="solid" style={{ backgroundColor: Colors.Success, borderColor: Colors.Success }}>{props.children}</CustomButton>
+    return <CustomButton {...props} variant="solid" color='cyan' style={{ backgroundColor: Colors.Success, border: 0 }}>{props.children}</CustomButton>
 }
 
 export const ButtonDanger = (props: ButtonProps) => {

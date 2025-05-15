@@ -3,21 +3,21 @@ import { Container, ContainerCommands } from '@components/containers'
 import { Searcher } from '@components/inputs/searcher'
 import Loading from '@components/loading'
 import { TitlePage } from '@components/titles'
-import { useUsuarios } from '@contexts/seguridad/usuarios'
 import { RequestFilter } from '@interfaces/global'
 import { Col, Flex, Space } from 'antd'
 import { useEffect, useState } from 'react'
-import FormUsuario from './form'
+import FormPosicion from './form'
 import Listado from './listado'
+import { usePosiciones } from '@contexts/empresas/posiciones'
 import { useLocation } from 'react-router-dom'
 
-export default function PageUsuarios() {
+export default function PagePosiciones() {
 
-    const { state: { modelo, procesando, paginacion, recargar }, nuevo, todos } = useUsuarios()
+    const { state: { modelo, procesando, paginacion, recargar }, nuevo, todos } = usePosiciones()
     const [filtro, setFiltro] = useState<string>('')
     const url = useLocation()
 
-    const cargarUsuarios = async () => {
+    const cargarPosiciones = async () => {
 
         const request: RequestFilter = {
             pageSize: paginacion?.pageSize ?? 10,
@@ -28,24 +28,24 @@ export default function PageUsuarios() {
 
     }
 
-    useEffect(() => { cargarUsuarios() }, [url.pathname, filtro])
-    useEffect(() => { if (recargar) { cargarUsuarios() } }, [recargar])
+    useEffect(() => { cargarPosiciones() }, [url.pathname, filtro])
+    useEffect(() => { if (recargar) { cargarPosiciones() } }, [recargar])
 
     return (
         <Col span={24}>
-            <TitlePage title='Usuarios' />
+            <TitlePage title='Posiciones de Trabajo' />
             <ContainerCommands className='mb-3'>
                 <Flex align='center' justify='space-between'>
                     <Space>
                         <Searcher key='1' onChange={setFiltro} />
                     </Space>
-                    <ButtonPrimary key='2' onClick={nuevo}>Nuevo Usuario</ButtonPrimary>
+                    <ButtonPrimary key='2' onClick={nuevo}>Nueva Posici&oacute;n</ButtonPrimary>
                 </Flex>
             </ContainerCommands>
             <Container styles={{ body: { paddingLeft: 0, paddingRight: 0 } }}>
                 <Listado />
             </Container>
-            {!modelo ? <></> : <FormUsuario />}
+            {!modelo ? <></> : <FormPosicion />}
             <Loading fullscreen active={procesando} message='Procesando, espere...' />
         </Col>
     )

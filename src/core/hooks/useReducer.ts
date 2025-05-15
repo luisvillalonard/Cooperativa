@@ -4,7 +4,7 @@ import reducer, { Actions, ActionTypes, initState, State } from "../reducers/glo
 import { useFetch } from "./useFetch";
 
 export function useReducerHook<T extends unknown>(urlBase: string) {
-    
+
     const [state, dispatch] = useReducer<Reducer<State<T>, ActionTypes<T>>>(reducer, initState<T>());
     const api = useFetch();
 

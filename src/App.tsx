@@ -19,9 +19,9 @@ export default function App() {
   return (
     <Layout className='h-100'>
       <HeaderApp />
-      <Layout style={{ backgroundColor: '#f0f3f7' }}>
+      <Layout style={{ backgroundColor: '#f5f5f5' }}>
         <MenuApp />
-        <Layout.Content className='p-4 position-relative overflow-auto' style={{ border: '2px solid red' }}>
+        <Layout.Content className='p-4 position-relative overflow-auto'>
           <RoutesPrivate />
         </Layout.Content>
       </Layout>

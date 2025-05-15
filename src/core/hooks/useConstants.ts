@@ -7,6 +7,10 @@ export const Urls = {
     Home: '/',
     Dashboard: '/dash',
     Login: '/login',
+    Auxiliares: {
+        Generos: 'generos',
+        Billetes: 'billetes',
+    },
     Empresas: {
         Base: 'empresas',
         Horarios: 'horarios',

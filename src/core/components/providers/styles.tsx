@@ -56,7 +56,7 @@ const StyleProvider = (props: Pick<ControlProps, "children">) => {
                         subMenuItemSelectedColor: 'yellow',
                     },
                     Form: {
-                        itemMarginBottom: 2,
+                        itemMarginBottom: 10,
                         verticalLabelMargin: 3,
                         verticalLabelPadding: 0,
                     },
