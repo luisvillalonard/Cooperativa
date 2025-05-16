@@ -1,17 +1,17 @@
 export interface Pais {
-    id: Number,
+    id: number,
     nombre: string,
     principal: boolean,
 }
 
 export interface Provincia {
-    id: Number,
+    id: number,
     nombre: string,
-    paisId: Number,
+    pais: Pais | undefined,
 }
 
 export interface Municipio {
-    id: Number,
+    id: number,
     nombre: string,
-    provinciaId: Number,
+    provincia: Provincia | undefined,
 }

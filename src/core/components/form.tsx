@@ -9,7 +9,7 @@ export const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
     onFinish: (values: any) => void,
 }) => {
 
-    const { name, title, open, loading, initialValues, children, onClose, onFinish } = props
+    const { name, title, open, width, loading, initialValues, children, onClose, onFinish } = props
 
     return (
         <Modal
@@ -19,6 +19,7 @@ export const FormModal = (props: FormProps & Omit<ModalProps, "onFinish"> & {
             closable={false}
             onCancel={onClose}
             getContainer={false}
+            width={width}
             footer={
                 <Flex justify="space-between">
                     <ButtonDefault key="1" htmlType="button" onClick={onClose}>Cerrar</ButtonDefault>

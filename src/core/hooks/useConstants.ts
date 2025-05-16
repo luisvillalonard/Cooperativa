@@ -16,8 +16,16 @@ export const Urls = {
         Horarios: 'horarios',
         Posiciones: 'posiciones',
         Empleados: 'empleados',
-        Sucursales: 'sucursales',
-        DatosGenerales: 'generales',
+        Empresas: 'todas',
+    },
+    Socios: {},
+    AhorrosRetiros: {},
+    Prestamos: {},
+    Recibos: {},
+    Contabilidad: {},
+    Configuraciones: {
+        Provincias: 'provincias',
+        Municipios: 'municipios',
     },
     Seguridad: {
         Base: 'seguridad',
@@ -28,6 +36,7 @@ export const Urls = {
         Validar: 'validar',
         CambiarClave: 'cambioClave',
     },
+    Reportes: {},
 }
 
 export const Colors = {

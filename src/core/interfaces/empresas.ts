@@ -1,19 +1,22 @@
-import { Genero } from "./auxiliares";
-import { Municipio, Provincia } from "./configuraciones";
+import { Genero } from "./auxiliares"
 
 export interface Empresa {
     id: number,
     nombre: string,
     rnc: string,
     direccion?: string,
-    provincia: Provincia | undefined,
-    municipio: Municipio | undefined,
+    provinciaId: number,
+    municipioId: number,
     telefono?: string,
     webSite?: string,
     correo?: string,
     fax?: string,
     logoId?: number,
     activa: boolean,
+}
+
+export interface Sucursal extends Empresa {
+    empresa: Empresa | undefined,
 }
 
 export interface Empleado {
